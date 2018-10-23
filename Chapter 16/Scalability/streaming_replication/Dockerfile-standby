@@ -1,0 +1,30 @@
+FROM debian:stretch
+
+RUN apt-get update 
+
+RUN apt-get install -y wget gnupg locales locales-all
+
+ENV LC_ALL en_US.UTF-8
+ENV LANG en_US.UTF-8
+ENV LANGUAGE en_US.UTF-8
+
+RUN echo "deb http://apt.postgresql.org/pub/repos/apt/ stretch-pgdg main 11" >  /etc/apt/sources.list.d/pgdg.list && \
+	wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add - && \
+	apt-get update
+RUN	apt-get install -y postgresql-11   
+
+ADD *.sql ./
+ADD recovery.conf /var/lib/postgresql/11/main/
+
+RUN chown postgres:postgres /var/lib/postgresql/11/main/recovery.conf
+
+RUN sed -i 's/md5/trust/g' /etc/postgresql/11/main/pg_hba.conf && \
+	echo "host  all  car_portal_app  0.0.0.0/0  trust" >> /etc/postgresql/11/main/pg_hba.conf && \
+	echo "listen_addresses = '*'" >> /etc/postgresql/11/main/postgresql.conf && \
+	service postgresql start && \
+	service postgresql stop
+
+VOLUME /etc/postgresql/11/main
+VOLUME /var/lib/postgresql/11/main
+
+ENTRYPOINT ["su", "-", "postgres", "-c", "/usr/lib/postgresql/11/bin/postgres --config-file=/etc/postgresql/11/main/postgresql.conf"]
