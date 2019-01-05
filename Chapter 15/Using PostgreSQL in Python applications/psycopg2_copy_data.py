@@ -21,5 +21,7 @@ with conn.cursor() as cur, StringIO(copy_string) as s:
     cur.copy_from(table='car_portal_app.car_model', file=s,
                   columns=['make', 'model'])
 
+print("{} records inserted".format(len(new_records)))
+
 conn.commit()
 conn.close()

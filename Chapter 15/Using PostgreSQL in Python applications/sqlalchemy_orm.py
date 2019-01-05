@@ -68,6 +68,7 @@ new_car_model = Car_model(make="Jaguar", model="XE")
 session = Session()
 session.add(new_car_model)
 session.commit()
+print("Created {} {}".format(new_car_model.make, new_car_model.model))
 session.close()
 
 # Delete a car model
@@ -76,4 +77,5 @@ old_car_model = session.query(Car_model).filter(
     and_(Car_model.make == "Jaguar", Car_model.model == "XE")).one()
 session.delete(old_car_model)
 session.commit()
+print("Removed {} {}".format(new_car_model.make, new_car_model.model))
 session.close()
