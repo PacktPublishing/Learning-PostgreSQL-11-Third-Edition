@@ -1752,4 +1752,3 @@ insert into car_portal_app.advertisement VALUES
  (default, to_date('2015-02-26','yyyy-mm-dd'), 222, 126),
  (default, to_date('2014-02-15','yyyy-mm-dd'), 225, 119),
  (default, to_date('2014-09-16','yyyy-mm-dd'), 226, 115);
-
