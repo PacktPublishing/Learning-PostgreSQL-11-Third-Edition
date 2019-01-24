@@ -66,7 +66,7 @@ CREATE INDEX ON  car_portal_app.account (first_name) INCLUDE (last_name);
 
 CREATE index on car_portal_app.account(first_name);
 CREATE index on car_portal_app.account(first_name);
--- Index maintinance
+-- Index maintenance
 REINDEX index car_portal_app.account_history_account_id_search_key_search_date_key;
 CREATE UNIQUE INDEX CONCURRENTLY ON car_portal_app.account_history(account_id, search_key, search_date);
 
