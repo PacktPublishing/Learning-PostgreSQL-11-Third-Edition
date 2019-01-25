@@ -1,0 +1,4 @@
+gpg --gen-key
+gpg --list-secret-key
+gpg -a --export public_key >/var/lib/postgresql/11/main/public.key
+gpg -a --export-secret-key  private_key >/var/lib/postgresql/11/main/secret.key
