@@ -1,2 +1,2 @@
 #!/bin/bash
-sudo apt-get install postgresql-server-dev-10
+sudo apt-get install postgresql-server-dev-11
